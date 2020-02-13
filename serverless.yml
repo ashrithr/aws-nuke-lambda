@@ -1,0 +1,16 @@
+service: aws-nuke-lambda
+provider:
+  name: aws
+  runtime: rust
+  memorySize: 128
+  region: us-east-1
+
+package:
+  individually: true
+
+plugins:
+  - serverless-rust
+
+functions:
+  anl:
+    handler: aws-nuke-lambda
