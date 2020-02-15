@@ -85,14 +85,22 @@ name = "aws-nuke-lambda"
 version = "0.1.0"
 dependencies = [
  "aws_nuke",
+ "chrono",
+ "fern",
  "lambda_runtime",
+ "log",
+ "rusoto_core 0.42.0",
+ "rusoto_s3",
+ "serde",
+ "serde_derive",
  "serde_json",
+ "toml",
 ]
 
 [[package]]
 name = "aws_nuke"
 version = "0.1.0"
-source = "git+https://github.com/ashrithr/aws-nuke#b433a618b088ba0af3329c88f0d677c128733ea5"
+source = "git+https://github.com/ashrithr/aws-nuke#8ef7f6c971c9bd6be215a40ea653445baeb05761#8ef7f6c971c9bd6be215a40ea653445baeb05761"
 dependencies = [
  "ansi_term 0.12.1",
  "chrono",
@@ -110,8 +118,8 @@ dependencies = [
  "rusoto_ce",
  "rusoto_cloudtrail",
  "rusoto_cloudwatch",
- "rusoto_core",
- "rusoto_credential",
+ "rusoto_core 0.41.0",
+ "rusoto_credential 0.41.1",
  "rusoto_ec2",
  "rusoto_ecs",
  "rusoto_elb",
@@ -416,9 +424,9 @@ dependencies = [
 
 [[package]]
 name = "csv-core"
-version = "0.1.6"
+version = "0.1.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9b5cadb6b25c77aeff80ba701712494213f4a8418fcda2ee11b6560c3ad0bf4c"
+checksum = "2b2466559f260f48ad25fe6317b3c8dac77b5bdb5763ac7d9d6103530663bc90"
 dependencies = [
  "memchr",
 ]
@@ -647,6 +655,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "805026a5d0141ffc30abb3be3173848ad46a1b1664fe632428479619a3644d77"
 
 [[package]]
+name = "hex"
+version = "0.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "76cdda6bf525062a0c9e8f14ee2b37935c86b8efb6c8b69b3c83dfb518a914af"
+
+[[package]]
 name = "hmac"
 version = "0.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -759,6 +773,19 @@ dependencies = [
  "tokio-rustls",
  "webpki",
  "webpki-roots",
+]
+
+[[package]]
+name = "hyper-tls"
+version = "0.3.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3a800d6aa50af4b5850b2b0f659625ce9504df908e9733b635720483be26174f"
+dependencies = [
+ "bytes",
+ "futures",
+ "hyper",
+ "native-tls",
+ "tokio-io",
 ]
 
 [[package]]
@@ -955,13 +982,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7e6bcd6433cff03a4bfc3d9834d504467db1f1cf6d0ea765d37d330249ed629d"
 
 [[package]]
-name = "memchr"
-version = "2.3.0"
+name = "md5"
+version = "0.7.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3197e20c7edb283f87c071ddfc7a2cca8f8e0b888c242959846a6fce03c72223"
-dependencies = [
- "libc",
-]
+checksum = "490cc448043f947bae3cbee9c203358d62dbee0db12107a74be5c30ccfd09771"
+
+[[package]]
+name = "memchr"
+version = "2.3.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "53445de381a1f436797497c61d851644d0e8e88e6140f22872ad33a704933978"
 
 [[package]]
 name = "memoffset"
@@ -1366,7 +1396,7 @@ checksum = "84350ce8212d89f1836596a3a86086503c5260b38499a6ff78a08ff515a830b5"
 dependencies = [
  "bytes",
  "futures",
- "rusoto_core",
+ "rusoto_core 0.41.0",
  "serde",
  "serde_derive",
  "serde_json",
@@ -1380,7 +1410,7 @@ checksum = "7933f2ac4b3ff28e478d1c783acd8ecc1cbb8d064d43265c1d25a66a3cd9eba1"
 dependencies = [
  "bytes",
  "futures",
- "rusoto_core",
+ "rusoto_core 0.41.0",
  "serde",
  "serde_derive",
  "serde_json",
@@ -1394,7 +1424,7 @@ checksum = "f470c278733d18760a5966a89227f4d9a06bb1d8260d676b011faa4d2aa82342"
 dependencies = [
  "bytes",
  "futures",
- "rusoto_core",
+ "rusoto_core 0.41.0",
  "serde_urlencoded",
  "xml-rs",
 ]
@@ -1408,21 +1438,47 @@ dependencies = [
  "base64 0.10.1",
  "bytes",
  "futures",
- "hex",
+ "hex 0.3.2",
  "hmac",
  "http",
  "hyper",
  "hyper-rustls",
  "lazy_static",
  "log",
- "md5",
+ "md5 0.6.1",
  "percent-encoding 2.1.0",
- "rusoto_credential",
+ "rusoto_credential 0.41.1",
  "rustc_version",
  "serde",
  "serde_derive",
  "serde_json",
  "sha2",
+ "time",
+ "tokio",
+ "tokio-timer",
+ "xml-rs",
+]
+
+[[package]]
+name = "rusoto_core"
+version = "0.42.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f1d1ecfe8dac29878a713fbc4c36b0a84a48f7a6883541841cdff9fdd2ba7dfb"
+dependencies = [
+ "base64 0.11.0",
+ "bytes",
+ "futures",
+ "http",
+ "hyper",
+ "hyper-tls",
+ "lazy_static",
+ "log",
+ "rusoto_credential 0.42.0",
+ "rusoto_signature",
+ "rustc_version",
+ "serde",
+ "serde_derive",
+ "serde_json",
  "time",
  "tokio",
  "tokio-timer",
@@ -1449,6 +1505,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "rusoto_credential"
+version = "0.42.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8632e41d289db90dd40d0389c71a23c5489e3afd448424226529113102e2a002"
+dependencies = [
+ "chrono",
+ "dirs",
+ "futures",
+ "hyper",
+ "lazy_static",
+ "regex",
+ "serde",
+ "serde_derive",
+ "serde_json",
+ "shlex",
+ "tokio-process",
+ "tokio-timer",
+]
+
+[[package]]
 name = "rusoto_ec2"
 version = "0.41.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1456,7 +1532,7 @@ checksum = "d41787042d15ec7c5f3542495339e1418aac8aaff914d26129e17b46f63faadd"
 dependencies = [
  "bytes",
  "futures",
- "rusoto_core",
+ "rusoto_core 0.41.0",
  "serde_urlencoded",
  "xml-rs",
 ]
@@ -1469,7 +1545,7 @@ checksum = "f4e2b14019525016c8954c73ec2f080df22673276f859414fd30de7bef83adff"
 dependencies = [
  "bytes",
  "futures",
- "rusoto_core",
+ "rusoto_core 0.41.0",
  "serde",
  "serde_derive",
  "serde_json",
@@ -1483,7 +1559,7 @@ checksum = "da5ae1d931aa9a251d157f1aa56fbe785c4c5b098e5b9bb70f956bed7c375784"
 dependencies = [
  "bytes",
  "futures",
- "rusoto_core",
+ "rusoto_core 0.41.0",
  "serde_urlencoded",
  "xml-rs",
 ]
@@ -1496,7 +1572,7 @@ checksum = "07989cda38dd0a2fa3ae5feb7cedcf4f882ab798921e8a56ca6a4da102da70f6"
 dependencies = [
  "bytes",
  "futures",
- "rusoto_core",
+ "rusoto_core 0.41.0",
  "serde_urlencoded",
  "xml-rs",
 ]
@@ -1509,7 +1585,7 @@ checksum = "08d2cd01cd7fcd794adf479d46a97a94b1a2b28b80230e4aba2a952f23ceb69e"
 dependencies = [
  "bytes",
  "futures",
- "rusoto_core",
+ "rusoto_core 0.41.0",
  "serde_urlencoded",
  "xml-rs",
 ]
@@ -1522,7 +1598,7 @@ checksum = "3133e8a78208a4e5b55b07245e4ca20555ef2770023e1fa6760ad0c3890d7f7f"
 dependencies = [
  "bytes",
  "futures",
- "rusoto_core",
+ "rusoto_core 0.41.0",
  "serde",
  "serde_derive",
  "serde_json",
@@ -1536,7 +1612,7 @@ checksum = "e9339aebee16e529893b31bc0d01bf581a440e02dac2705bd58926a11504e886"
 dependencies = [
  "bytes",
  "futures",
- "rusoto_core",
+ "rusoto_core 0.41.0",
  "serde_urlencoded",
  "xml-rs",
 ]
@@ -1549,8 +1625,44 @@ checksum = "d1095456e587fe28570947aa1d63c7c1480fb8d8fcccfeafdfa5484a895a9858"
 dependencies = [
  "bytes",
  "futures",
- "rusoto_core",
+ "rusoto_core 0.41.0",
  "xml-rs",
+]
+
+[[package]]
+name = "rusoto_s3"
+version = "0.42.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3fedcadf3d73c2925b05d547b66787f2219c5e727a98c893fff5cf2197dbd678"
+dependencies = [
+ "bytes",
+ "futures",
+ "rusoto_core 0.42.0",
+ "xml-rs",
+]
+
+[[package]]
+name = "rusoto_signature"
+version = "0.42.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7063a70614eb4b36f49bcf4f6f6bb30cc765e3072b317d6afdfe51e7a9f482d1"
+dependencies = [
+ "base64 0.11.0",
+ "bytes",
+ "futures",
+ "hex 0.4.1",
+ "hmac",
+ "http",
+ "hyper",
+ "log",
+ "md5 0.7.0",
+ "percent-encoding 2.1.0",
+ "rusoto_credential 0.42.0",
+ "rustc_version",
+ "serde",
+ "sha2",
+ "time",
+ "tokio",
 ]
 
 [[package]]

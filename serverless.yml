@@ -4,13 +4,35 @@ provider:
   runtime: rust
   memorySize: 128
   region: us-east-1
+  deploymentBucket: awsnuke
 
 package:
   individually: true
 
 plugins:
   - serverless-rust
+  - serverless-iam-roles-per-function
 
 functions:
   anl:
     handler: aws-nuke-lambda
+    iamRoleStatementsName: aws-nuke-lambda-iam-role
+    iamRoleStatements:
+      - Effect: "Allow"
+        Action:
+          - "s3:ListAllMyBuckets"
+          - "s3:GetBucketLocation"
+        Resource: "*"
+      - Effect: "Allow"
+        Action: "s3:*"
+        Resource:
+          - "arn:aws:s3:::awsnuke"
+          - "arn:aws:s3:::awsnuke/*"
+      - Effect: "Allow"
+        Action:
+          - "ec2:*"
+          - "rds:*"
+          - "cloudwatch:*"
+          - "ce:*"
+          - "pricing:*"
+        Resource: "*"
