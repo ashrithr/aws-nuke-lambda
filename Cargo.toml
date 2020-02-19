@@ -5,14 +5,14 @@ authors = ["Ashrith Mekala <ashrith@me.com>"]
 edition = "2018"
 
 [dependencies]
-aws_nuke = { git = "https://github.com/ashrithr/aws-nuke#8ef7f6c971c9bd6be215a40ea653445baeb05761" }
+aws_nuke = { git = "https://github.com/ashrithr/aws-nuke#06354c2d34e01cf23623897eea24659cfb30f82a" }
 chrono = "0.4"
 fern = "0.5"
 toml = "0.5"
 log = "0.4"
 lambda_runtime = "0.2"
-rusoto_core = "0.42.0"
-rusoto_s3 = "0.42.0"
+rusoto_core = { version = "0.42", default_features = false, features = ["rustls"] }
+rusoto_s3 = { version = "0.42", default_features = false, features = ["rustls"] }
 serde = "1.0"
 serde_derive = "1.0"
 serde_json = "1.0"

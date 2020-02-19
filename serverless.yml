@@ -3,6 +3,7 @@ provider:
   name: aws
   runtime: rust
   memorySize: 128
+  timeout: 900
   region: us-east-1
   deploymentBucket: awsnuke
 
@@ -35,4 +36,5 @@ functions:
           - "cloudwatch:*"
           - "ce:*"
           - "pricing:*"
+          - "s3:*"
         Resource: "*"

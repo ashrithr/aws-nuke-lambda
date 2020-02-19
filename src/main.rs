@@ -79,6 +79,7 @@ fn setup_logging(logging_level: &u8) {
         .level_for("tokio_threadpool", log::LevelFilter::Info)
         .level_for("mio", log::LevelFilter::Info)
         .level_for("want", log::LevelFilter::Info)
+        .level_for("rusoto_signature", log::LevelFilter::Info)
         .chain(std::io::stdout())
         .apply()
         .expect("could not set up logging");
